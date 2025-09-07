@@ -91,46 +91,67 @@ const MenuList = () => {
 const SideNavBar: React.FC = () => {
   return (
     <aside className="sidenav">
-      {/* ORGANISATION SWITCHER */}
-      <div className="sidenav__action">
-        <div className="sidenav__action-organisation">
-          <img
-            src={"/images/briefcase.svg"}
-            alt="briefcase icon"
-            width={16}
-            height={16}
-          />
-          Switch Organisation
-          <Dropdown
-            trigger={
+      <div className="sidenav__holder">
+        {/* ORGANISATION SWITCHER */}
+        <div className="sidenav__holder-top">
+          <div className="sidenav__action">
+            <div className="sidenav__action-organisation">
               <img
-                src={"/images/dropdown-outline.svg"}
-                alt="dropdown icon"
-                width={14}
-                height={14}
+                src={"/images/briefcase.svg"}
+                alt="briefcase icon"
+                width={16}
+                height={16}
               />
-            }
-          >
-            <ul>
-              <li>LendSqr</li>
-            </ul>
-          </Dropdown>
+              Switch Organisation
+              <Dropdown
+                trigger={
+                  <img
+                    src={"/images/dropdown-outline.svg"}
+                    alt="dropdown icon"
+                    width={14}
+                    height={14}
+                  />
+                }
+              >
+                <ul>
+                  <li>LendSqr International Ltd.</li>
+                </ul>
+              </Dropdown>
+            </div>
+
+            {/* DASHBOARD LINK */}
+            <div className="sidenav__action-tab">
+              <span>
+                <img
+                  src={"/images/home.svg"}
+                  alt="briefcae icon"
+                  width={16}
+                  height={16}
+                />
+              </span>
+              Dashboard
+            </div>
+          </div>
+          <MenuList />
         </div>
 
-        {/* DASHBOARD LINK */}
-        <div className="sidenav__action-tab">
-          <span>
-            <img
-              src={"/images/home.svg"}
-              alt="briefcae icon"
-              width={16}
-              height={16}
-            />
-          </span>
-          Dashboard
+        <div className="sidenav__holder-down">
+          <div className={`sidenav__nav-tooltip`}>
+            <li>
+              <span>
+                <img
+                  src={"/images/sign-out.svg"}
+                  alt={`sign out icon`}
+                  width={16}
+                  height={16}
+                />
+              </span>
+              Logout
+            </li>
+          </div>
+          <span className="version-label">v1.2.0</span>
         </div>
       </div>
-      <MenuList />
     </aside>
   );
 };

@@ -59,7 +59,7 @@ $lg: 1024px;
 
 /* table */
 .table {
-  min-width: 100%;
+  min-width: 1000px;
   border-collapse: separate;
   width: 100%;
 
@@ -79,6 +79,7 @@ $lg: 1024px;
     color: $color-text-primary;
     padding-top: 0.75rem;
     padding-bottom: 0.9rem;
+    // white-space: nowrap;
   }
 }
 
