@@ -1,0 +1,265 @@
+@use "../../utils/" as u;
+@import "../../global/colors";
+
+.details {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: u.rem(50);
+
+  .main_text {
+    margin: 0;
+    font-size: u.rem(22);
+    font-family: "Work Sans";
+    font-weight: 500;
+    color: $color-primary;
+  }
+  .sub_text {
+    margin: 0;
+    font-size: u.rem(14);
+    font-family: "Work Sans";
+    font-weight: 400;
+    color: $color-text-primary;
+  }
+  .seperator {
+    width: 1px;
+    height: u.rem(80);
+    background-color: $color-subtle;
+
+    @include u.breakpoint(medium) {
+      height: 1px;
+      width: 100%;
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: u.rem(51);
+    background-color: white;
+    padding: u.rem(30) u.rem(30) 0px;
+    border: solid 1px rgba(33, 63, 125, 0.06);
+    border-radius: u.rem(4);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+
+    -webkit-border-radius: u.rem(4);
+    -moz-border-radius: u.rem(4);
+    -ms-border-radius: u.rem(4);
+    -o-border-radius: u.rem(4);
+
+    &-main {
+      display: flex;
+      align-items: center;
+      gap: u.rem(40);
+      @include u.breakpoint(large) {
+        gap: u.rem(20);
+      }
+
+      @include u.breakpoint(medium) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      &_user {
+        display: flex;
+        gap: u.rem(20);
+        align-items: center;
+
+        .profile_pic {
+          display: grid;
+          place-content: center;
+          aspect-ratio: 1;
+          width: u.rem(100);
+          height: u.rem(100);
+          background-color: rgba(33, 63, 125, 0.15);
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+        }
+
+        .user_info {
+          display: flex;
+          flex-direction: column;
+          gap: u.rem(8);
+        }
+      }
+
+      &_tier,
+      &_balance {
+        display: flex;
+        flex-direction: column;
+        gap: u.rem(8);
+
+        .stars_holder {
+          display: flex;
+          gap: u.rem(4);
+        }
+        .tier_title {
+          margin: 0;
+          font-size: u.rem(14);
+          font-family: "Work Sans";
+          font-weight: 500;
+          color: $color-text-primary;
+        }
+      }
+    }
+
+    // CATEGORIES
+    &-categories {
+      width: 100%;
+      .category_items {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: u.rem(35);
+        height: 100%;
+        width: 100%;
+        overflow-y: hidden;
+        overflow-x: auto;
+
+        @include u.breakpoint(medium) {
+          gap: u.rem(10);
+        }
+        @include u.breakpoint(small) {
+          gap: u.rem(0);
+        }
+
+        &::-webkit-scrollbar {
+          height: 3px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #8888882f;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: #555;
+        }
+
+        .category_button {
+          padding: 0px u.rem(25);
+          white-space: nowrap;
+          height: 100%;
+          display: flex;
+          align-self: flex-start;
+          background: none;
+          border: none;
+          outline: none;
+          cursor: pointer;
+
+          &:hover {
+            .category_item {
+              color: $color-secondary;
+            }
+          }
+
+          .category_item {
+            font-size: u.rem(16);
+            font-family: "SF Compact Text";
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.8);
+          }
+        }
+        .active-tab {
+          border-bottom: solid 2px $color-secondary;
+
+          .category_item {
+            font-size: u.rem(16);
+            font-family: "Work Sans";
+            font-weight: 400;
+            color: $color-secondary;
+          }
+        }
+      }
+      &_list {
+        width: 100%;
+        height: u.rem(33);
+      }
+    }
+  }
+
+  &__body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: u.rem(28);
+    padding: u.rem(30) u.rem(30);
+    border: solid 1px rgba(33, 63, 125, 0.06);
+    border-radius: u.rem(4);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+
+    -webkit-border-radius: u.rem(4);
+    -moz-border-radius: u.rem(4);
+    -ms-border-radius: u.rem(4);
+    -o-border-radius: u.rem(4);
+    .seperator {
+      width: 100%;
+      background-color: $color-subtle;
+      height: 1px;
+    }
+
+    &-section {
+      display: flex;
+      flex-direction: column;
+      gap: u.rem(30);
+
+      .grid_5 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, min(u.rem(170)));
+        column-gap: u.rem(30);
+        row-gap: u.rem(30);
+
+        @include u.breakpoint(xLarge) {
+          justify-content: space-between;
+        }
+      }
+      .grid_4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, min(u.rem(225)));
+        gap: 20px;
+        row-gap: u.rem(30);
+        justify-content: space-between;
+      }
+
+      .title {
+        font-size: u.rem(16);
+        font-family: "Work Sans";
+        font-weight: 500;
+        color: $color-primary;
+      }
+
+      .detail {
+        position: relative;
+        width: 100%;
+        white-space: normal; // ✅ allows wrapping
+        overflow-wrap: break-word; // ✅ breaks long words instead of overflowing
+        word-break: break-word;
+
+        &_title {
+          text-transform: uppercase;
+          font-size: u.rem(12);
+          font-family: "Work Sans";
+          font-weight: 400;
+          color: $color-text-primary;
+        }
+        &_point {
+          font-size: u.rem(16);
+          font-family: "Work Sans";
+          font-weight: 500;
+          color: $color-text-primary;
+          margin-top: u.rem(8);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@use "../utils/" as u;
+@import "../global/colors";
+
+.btn {
+  position: relative;
+  height: u.rem(40);
+  display: grid;
+  border-radius: u.rem(8);
+  -webkit-border-radius: u.rem(8);
+  -moz-border-radius: u.rem(8);
+  -ms-border-radius: u.rem(8);
+  -o-border-radius: u.rem(8);
+  place-content: center;
+  padding: 0px 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.primary {
+    background-color: $color-secondary;
+    border: 2px solid $color-secondary;
+    color: $color-secondary;
+    &:hover {
+      background-color: rgb(47, 165, 165);
+      border: solid 2px rgb(47, 165, 165);
+    }
+  }
+
+  &.secondary {
+    background-color: $color-text-primary;
+    border: 2px solid $color-text-primary;
+    color: $color-text-primary;
+    &:hover {
+      background-color: rgb(48, 54, 71);
+      border: solid 2px rgb(48, 54, 71);
+    }
+  }
+
+  &.outline {
+    background: none;
+    &:hover {
+      background: inherit;
+      color: white;
+    }
+  }
+  &.fill {
+    color: white;
+  }
+
+  &.text {
+    background: none;
+    color: #007bff;
+    border: none;
+    padding: 0px;
+    &:hover {
+      text-decoration: underline;
+      background-color: none;
+    }
+  }
+
+  &.disable {
+    background-color: $color-text-primary;
+    border: 2px solid $color-text-primary;
+    color: $color-subtle;
+  }
+  &.fw {
+    width: 100%;
+  }
+}

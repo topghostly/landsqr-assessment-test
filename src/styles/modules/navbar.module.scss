@@ -1,0 +1,130 @@
+@use "../utils/" as u;
+@import "../global/colors";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: u.rem(100);
+  padding: 0px u.rem(30);
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03);
+
+  &__control {
+    display: none;
+    cursor: pointer;
+    @include u.breakpoint(xLarge) {
+      display: block;
+    }
+  }
+
+  &__logo {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__form {
+    height: u.rem(40);
+
+    @include u.breakpoint(medium) {
+      display: none;
+    }
+
+    &_group {
+      width: u.rem(400);
+      display: grid;
+      grid-template-columns: 1fr u.rem(56);
+      height: u.rem(40);
+    }
+    &_input {
+      position: relative;
+      border: 2px solid rgb(230, 230, 230);
+      border-top-left-radius: u.rem(8);
+      border-bottom-left-radius: u.rem(8);
+      color: $color-text-primary;
+      padding-left: u.rem(15);
+      font-family: "Work Sans";
+      font-weight: 400;
+      outline: none;
+      border-right: none;
+      font-size: u.rem(14);
+    }
+  }
+  &__info_holder {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.doc_link {
+  font-family: "Roboto";
+  font-weight: 400;
+  text-decoration: underline;
+  color: $color-primary;
+  margin-right: u.rem(47);
+
+  @include u.breakpoint(xLarge) {
+    display: none;
+  }
+}
+.notification_holder {
+  margin-right: u.rem(30);
+
+  @include u.breakpoint(xLarge) {
+    display: none;
+  }
+}
+
+.user__details {
+  display: flex;
+  gap: u.rem(8);
+
+  &_image {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+  }
+  &_name {
+    p {
+      font-family: "Work Sans";
+      font-weight: 500;
+      color: $color-primary;
+    }
+    display: flex;
+    gap: u.rem(6);
+    align-items: center;
+  }
+
+  @include u.breakpoint(xLarge) {
+    display: none;
+  }
+}
+.side {
+  display: none;
+  cursor: pointer;
+
+  @include u.breakpoint(xLarge) {
+    display: block;
+  }
+  cursor: pointer;
+}
+
+.sidenav__holder {
+  position: fixed;
+  top: u.rem(100);
+  width: u.rem(283);
+  left: 0;
+  height: 100%;
+  max-height: calc(100vh - u.rem(100));
+  cursor: pointer;
+}

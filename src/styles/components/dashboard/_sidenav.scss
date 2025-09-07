@@ -1,0 +1,101 @@
+@use "../../utils/" as u;
+@import "../../global/colors";
+
+.sidenav {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - u.rem(100));
+  overflow-y: scroll;
+  color: $color-primary;
+  background-color: white;
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.04);
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  &__action {
+    margin-top: u.rem(39);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: u.rem(30);
+
+    &-organisation {
+      display: grid;
+      grid-template-columns: u.rem(25) 1fr u.rem(15);
+      align-items: center;
+      padding: 0px u.rem(30);
+    }
+    &-tab {
+      display: grid;
+      grid-template-columns: u.rem(25) 1fr;
+      align-items: center;
+      padding: 0px u.rem(30);
+      width: 100%;
+      height: u.rem(40);
+    }
+  }
+
+  &__nav {
+    list-style-type: none;
+    margin-top: u.rem(20);
+    display: flex;
+    flex-direction: column;
+    gap: u.rem(12);
+    padding: 0px;
+
+    .holder {
+      display: flex;
+      flex-direction: column;
+      gap: u.rem(12);
+      padding: 0px;
+    }
+
+    &-title {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-family: "Work Sans";
+      font-size: u.rem(12);
+      color: $color-text-primary;
+      padding: 0px u.rem(30);
+      margin-top: u.rem(10);
+    }
+    .active-link {
+      background-color: rgba(57, 205, 204, 0.15);
+      border-left: solid 3px rgba(57, 205, 204, 1);
+    }
+
+    &-tooltip {
+      width: 100%;
+      height: u.rem(40);
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        background-color: rgba(57, 205, 204, 0.15);
+      }
+
+      li {
+        display: grid;
+        align-items: center;
+        grid-template-columns: u.rem(25) 1fr;
+        padding: 0px u.rem(30);
+      }
+    }
+  }
+}

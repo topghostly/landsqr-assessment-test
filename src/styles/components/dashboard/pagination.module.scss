@@ -1,0 +1,102 @@
+@use "../../utils/" as u;
+@import "../../global/colors";
+
+.paginationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: $color-text-primary;
+  margin-top: u.rem(20);
+  font-family: "Work Sans";
+  font-weight: 400;
+  font-size: u.rem(14);
+
+  @include u.breakpoint(small) {
+    flex-direction: column;
+    justify-content: center;
+    gap: u.rem(15);
+  }
+
+  .showing {
+    display: flex;
+    align-items: center;
+    gap: u.rem(10);
+    font-size: u.rem(14);
+
+    .dropdown {
+      color: $color-text-primary;
+      font-family: "Work Sans";
+      font-weight: 500;
+      font-size: u.rem(14);
+      padding: 5px 10px;
+      border: 1px solid rgba(33, 63, 125, 0.1);
+      border-radius: u.rem(8);
+      background: white;
+      -webkit-border-radius: u.rem(8);
+      -moz-border-radius: u.rem(8);
+      -ms-border-radius: u.rem(8);
+      -o-border-radius: u.rem(8);
+      cursor: pointer;
+      width: u.rem(80);
+      background: rgba(33, 63, 125, 0.1);
+    }
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: u.rem(16);
+    font-family: "Work Sans";
+    font-weight: 400;
+    color: $color-text-primary;
+
+    .navButton {
+      background: rgba(33, 63, 125, 0.1);
+      border: none;
+      width: u.rem(24);
+      height: u.rem(24);
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background: none;
+      }
+    }
+    .disable {
+      cursor: no-drop;
+
+      &:hover {
+        background: rgba(33, 63, 125, 0.1);
+      }
+      img {
+        opacity: 0.6;
+      }
+    }
+
+    .pageNumber {
+      background: none;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: "Work Sans";
+      font-weight: 400;
+      color: $color-text-primary;
+      font-size: u.rem(16);
+      opacity: 0.6;
+
+      &:hover {
+        background: rgba(33, 63, 125, 0.1);
+      }
+    }
+    .active_page {
+      opacity: 1;
+    }
+
+    .dots {
+      padding: 0 5px;
+    }
+  }
+}

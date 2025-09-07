@@ -1,0 +1,76 @@
+@use "../../utils/" as u;
+@import "../../global/colors";
+
+.matrics {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: u.rem(26);
+
+  @include u.breakpoint(large) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: u.rem(26);
+  }
+  @include u.breakpoint(small) {
+    display: flex;
+    flex-direction: column;
+    gap: u.rem(26);
+  }
+
+  &__card {
+    width: 100%;
+    min-width: u.rem(220);
+    height: u.rem(160);
+    background-color: rgb(255, 255, 255);
+    border-radius: u.rem(4);
+    -webkit-border-radius: u.rem(4);
+    -moz-border-radius: u.rem(4);
+    -ms-border-radius: u.rem(4);
+    -o-border-radius: u.rem(4);
+    border: solid 1px rgba(33, 63, 125, 0.06);
+
+    padding: u.rem(20) u.rem(30);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+
+    .purple {
+      background-color: rgba(224, 24, 255, 0.1);
+    }
+    .blue {
+      background-color: rgba(87, 24, 255, 0.1);
+    }
+    .orange {
+      background-color: rgba(245, 95, 68, 0.1);
+    }
+    .red {
+      background-color: rgba(255, 51, 102, 0.1);
+    }
+
+    &-image {
+      width: u.rem(40);
+      height: u.rem(40);
+      display: grid;
+      place-content: center;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+    }
+
+    &-text {
+      font-family: "Work Sans";
+      font-weight: 500;
+      color: $color-text-primary;
+      font-size: u.rem(14);
+      margin-top: u.rem(14);
+    }
+    &-stat {
+      font-family: "Work Sans";
+      font-weight: 600;
+      color: $color-primary;
+      font-size: u.rem(24);
+      margin-top: u.rem(12);
+    }
+  }
+}

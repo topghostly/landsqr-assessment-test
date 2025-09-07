@@ -1,0 +1,70 @@
+$bar-height: 3px;
+$track-bg: rgba(0, 0, 0, 0.094);
+$bar-bg: #1e90ff;
+$bar-width: 10%;
+
+.loaderHolder {
+  width: 100%;
+  margin-top: 20vh;
+  background-color: white;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 20px;
+}
+
+.loaderTrack {
+  position: relative;
+  width: 100%;
+
+  height: $bar-height;
+  overflow: hidden;
+  background: $track-bg;
+  border-radius: 9999px;
+}
+
+.loaderBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: $bar-width;
+  background: rgba(57, 205, 204, 1);
+  border-radius: 9999px;
+  will-change: transform;
+  animation: slideAcross 1.2s ease-in-out infinite;
+}
+
+@keyframes slideAcross {
+  0% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(400%);
+    -webkit-transform: translateX(400%);
+    -moz-transform: translateX(400%);
+    -ms-transform: translateX(400%);
+    -o-transform: translateX(400%);
+  }
+  100% {
+    transform: translateX(1000%);
+    -webkit-transform: translateX(1000%);
+    -moz-transform: translateX(1000%);
+    -ms-transform: translateX(1000%);
+    -o-transform: translateX(1000%);
+  }
+}
+
+.fixedTop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
