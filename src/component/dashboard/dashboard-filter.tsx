@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { Table } from "@tanstack/react-table";
 import Button from "../shared/button";
-import type { Row } from "../pages/DashboardTable";
 import Dropdown from "../shared/dropdown";
+import type { UserDetailsProp } from "../../types/user";
 
 type FormState = {
   organization: string;
@@ -22,7 +22,11 @@ const initialForm: FormState = {
   status: "",
 };
 
-export default function UsersFilterForm({ table }: { table: Table<Row> }) {
+export default function UsersFilterForm({
+  table,
+}: {
+  table: Table<UserDetailsProp>;
+}) {
   const [form, setForm] = useState<FormState>(initialForm);
 
   const handleChange = (
@@ -69,11 +73,32 @@ export default function UsersFilterForm({ table }: { table: Table<Row> }) {
             onChange={handleChange}
           >
             <option value="">Select</option>
-            <option value="Insuranceco">Insuranceco</option>
-            <option value="Fintechafrica">Fintechafrica</option>
-            <option value="Techhub">Techhub</option>
-            <option value="Bizconnect">Bizconnect</option>
-            <option value="Banknigeria">Banknigeria</option>
+            <option value="Access Bank">Access Bank</option>
+            <option value="Algora Analytics">Algora Analytics</option>
+            <option value="Andela">Andela</option>
+            <option value="Carbon">Carbon</option>
+            <option value="Dangote Group">Dangote Group</option>
+            <option value="Flour Mills of Nigeria">
+              Flour Mills of Nigeria
+            </option>
+            <option value="Flutterwave">Flutterwave</option>
+            <option value="Globacom">Globacom</option>
+            <option value="IHS Towers">IHS Towers</option>
+            <option value="Interswitch">Interswitch</option>
+            <option value="Jumia">Jumia</option>
+            <option value="Konga">Konga</option>
+            <option value="Lendsqr">Lendsqr</option>
+            <option value="M-KOPA">M-KOPA</option>
+            <option value="MTN Nigeria">MTN Nigeria</option>
+            <option value="NITDA">NITDA</option>
+            <option value="Nigerian Breweries">Nigerian Breweries</option>
+            <option value="OPay">OPay</option>
+            <option value="Paystack">Paystack</option>
+            <option value="Sears Home Services">Sears Home Services</option>
+            <option value="Shell Nigeria">Shell Nigeria</option>
+            <option value="Total Energies">Total Energies</option>
+            <option value="UBA">UBA</option>
+            <option value="Zenith Bank">Zenith Bank</option>
           </select>
         </label>
 

@@ -13,6 +13,7 @@ function UserDetails() {
 
   useEffect(() => {
     setUserDetails(data);
+    console.log(data);
   }, [data]);
 
   // Define button styles to avoid crowded jsx
@@ -125,26 +126,26 @@ function UserDetails() {
                     )
                   )}
                   {/* EMPTY STAR FOR REMAINING TIER */}
-                  {/* {Array.from(
-                  { length: maximumTier - Number(userDetails?.user_tier) || 0 },
-                  (_, index) => (
-                    <img
-                      key={index}
-                      src={"/images/np_star_1171151_000000.svg"}
-                      alt="profilepic"
-                      width={16}
-                      height={16}
-                    />
-                  )
-                )} */}
+                  {Array.from(
+                    { length: 3 - Number(userDetails?.user_tier) || 0 },
+                    (_, index) => (
+                      <img
+                        key={index}
+                        src={"/images/np_star_1171151_000000.svg"}
+                        alt="profilepic"
+                        width={16}
+                        height={16}
+                      />
+                    )
+                  )}
                 </div>
               </div>
               <div className="seperator"></div>
               {/* USER BALANCE */}
               <div className="details__head-main_balance">
-                {/* <h2 className="main_text">
-                ₦{formatBalance(Number(userDetails?.bank.user_balance) || 0)}
-              </h2> */}
+                <h2 className="main_text">
+                  {userDetails?.bank.user_balance || 0}
+                </h2>
                 <p className="sub_text">
                   {userDetails?.bank.acct_number}/{userDetails?.bank.name}
                 </p>
@@ -248,9 +249,9 @@ function UserDetails() {
                 </div>
                 <div className="detail">
                   <p className="detail_title">loan repayment</p>
-                  {/* <p className="detail_point">
-                  ₦{formatBalance(Number(userDetails?.loan_repayment) || 0)}
-                </p> */}
+                  <p className="detail_point">
+                    {userDetails?.loan_repayment || 0}
+                  </p>
                 </div>
               </div>
             </div>

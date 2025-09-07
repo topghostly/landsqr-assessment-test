@@ -5,10 +5,8 @@ import SideNavBar from "../dashboard/side-navigation-bar.tsx";
 import { useState } from "react";
 
 import styles from "../../styles/modules/navbar.module.scss";
-import { useAuth } from "../../hook/useAuth.ts";
 
 const Navbar: React.FC = () => {
-  const { logout } = useAuth();
   const [activeSidebar, setActiveSideBar] = useState<boolean>(false);
   return (
     <nav className={styles.navbar}>
@@ -106,23 +104,13 @@ const Navbar: React.FC = () => {
             <p>Adedeji</p>
 
             {/* DROPDOWN FOR USER ACTION */}
-            <Dropdown
-              trigger={
-                <img
-                  src={"/images/dropdown.svg"}
-                  className={styles.user__details_image}
-                  alt="drop down image"
-                  width={20}
-                  height={20}
-                />
-              }
-            >
-              <ul>
-                <li>Account</li>
-                <li>Upgrade</li>
-                <li onClick={() => logout()}>Logout</li>
-              </ul>
-            </Dropdown>
+            <img
+              src={"/images/dropdown.svg"}
+              className={styles.user__details_image}
+              alt="drop down image"
+              width={20}
+              height={20}
+            />
           </div>
         </div>
 
@@ -139,7 +127,18 @@ const Navbar: React.FC = () => {
             }
           >
             <ul>
-              <li>Adedeji</li>
+              <li>
+                <div className={styles.user__details_mob}>
+                  <img
+                    src={"/images/profile.png"}
+                    className={styles.user__details_image}
+                    alt="Adedeji profile picture"
+                    width={48}
+                    height={48}
+                  />
+                  <span>Adedeji Isaac</span>
+                </div>
+              </li>
             </ul>
           </Dropdown>
         </div>

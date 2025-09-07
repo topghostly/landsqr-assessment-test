@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "../shared/dropdown";
+import { useAuth } from "../../hook/useAuth";
 
 const menuItems = [
   {
@@ -48,6 +49,7 @@ const menuItems = [
         href: "#",
       },
       { icon: "/images/audit.svg", label: "Audit Logs", href: "#" },
+      { icon: "/images/tire.svg", label: "Systems Messages", href: "#" },
     ],
   },
 ];
@@ -89,6 +91,7 @@ const MenuList = () => {
 
 // Sidebar Component
 const SideNavBar: React.FC = () => {
+  const { logout } = useAuth();
   return (
     <aside className="sidenav">
       <div className="sidenav__holder">
@@ -137,7 +140,7 @@ const SideNavBar: React.FC = () => {
 
         <div className="sidenav__holder-down">
           <div className={`sidenav__nav-tooltip`}>
-            <li>
+            <div onClick={() => logout()}>
               <span>
                 <img
                   src={"/images/sign-out.svg"}
@@ -147,7 +150,7 @@ const SideNavBar: React.FC = () => {
                 />
               </span>
               Logout
-            </li>
+            </div>
           </div>
           <span className="version-label">v1.2.0</span>
         </div>

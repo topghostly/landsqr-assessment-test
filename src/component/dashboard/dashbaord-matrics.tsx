@@ -20,6 +20,11 @@ const MatricsCard: React.FC<MatricsCardProps> = ({
 };
 
 const DashboardMatrics = ({ data }: { data: UserDetailsProp[] }) => {
+  const activeUsers = useMemo(
+    () => data?.filter((user: UserDetailsProp) => user.active),
+    [data]
+  );
+
   const metrics = [
     {
       label: "USERS",
@@ -29,19 +34,19 @@ const DashboardMatrics = ({ data }: { data: UserDetailsProp[] }) => {
     },
     {
       label: "ACTIVE USERS",
-      value: 140,
+      value: data ? activeUsers.length : 0,
       icon: "/images/np_users_1977590_000000.svg",
       color: "blue",
     },
     {
       label: "USERS WITH LOANS",
-      value: 100,
+      value: 174,
       icon: "/images/np_loan_1243991_000000.svg",
       color: "orange",
     },
     {
       label: "USERS WITH SAVINGS",
-      value: 19,
+      value: 192,
       icon: "/images/np_money_549109_000000.svg",
       color: "red",
     },
