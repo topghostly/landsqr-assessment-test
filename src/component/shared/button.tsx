@@ -5,7 +5,7 @@ export interface BtnProp {
   type: "submit" | "reset" | "button" | undefined;
   color?: "primary" | "secondary";
   variant: "fill" | "outline" | "text";
-  onClick: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   fullWidth?: boolean;
   customClass?: React.CSSProperties;
 }
@@ -20,9 +20,9 @@ const Button: React.FC<BtnProp> = ({
 }) => {
   return (
     <button
-      className={`btn ${color} ${variant} ${fullWidth ? "fw" : null}`}
+      className={`btn ${color} ${variant} ${fullWidth ? "fw" : null} `}
       style={{ ...customClass }}
-      onClick={() => onClick()}
+      onClick={onClick}
       type={type}
     >
       {children}

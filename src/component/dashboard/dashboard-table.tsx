@@ -11,14 +11,14 @@ import {
 } from "@tanstack/react-table";
 import "../../styles/components/dashboard/_dashboard-table.scss";
 import styles from "../../styles/components/dashboard/pagination.module.scss";
-import type { userDetailsPageProp } from "../../types/layout";
 import UsersFilterForm from "./dashboard-filter";
 import Dropdown from "../shared/dropdown";
 import { useNavigate } from "react-router-dom";
 import type { UserDetailsProp } from "../../types/user";
+import type { FilterFn } from "@tanstack/react-table";
 
 interface SetUserProps {
-  data: userDetailsPageProp[];
+  data: UserDetailsProp[];
   isLoading: boolean;
   isError: boolean;
   error: any;
@@ -26,16 +26,19 @@ interface SetUserProps {
 
 export type Row = UserDetailsProp;
 
-// date filter: match same calendar day (ignores time)
-const sameDay: import("@tanstack/react-table").FilterFn<Row> = (
-  row,
-  columnId,
-  filterValue
-) => {
+const sameDay: FilterFn<Row> = (row, columnId, filterValue) => {
   if (!filterValue) return true;
-  const v = row.getValue<string>(columnId);
-  const toYMD = (d: string) => new Date(d).toISOString().slice(0, 10); // yyyy-mm-dd
-  return toYMD(v) === filterValue;
+
+  const raw = row.getValue<string>(columnId);
+  if (!raw) return false;
+
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return false;
+
+  const rowYMD = d.toISOString().slice(0, 10);
+  const filterYMD = String(filterValue).slice(0, 10);
+
+  return rowYMD === filterYMD;
 };
 const columnHelper = createColumnHelper<Row>();
 
@@ -91,7 +94,7 @@ function DashboardTable({ data, isLoading, isError, error }: SetUserProps) {
             month: "short",
             day: "2-digit",
           }),
-        filterFn: "sameDay",
+        filterFn: sameDay,
       }),
       columnHelper.accessor("kyc_status", {
         header: () => (

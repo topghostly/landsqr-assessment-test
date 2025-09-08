@@ -21,7 +21,7 @@ export async function getUsersSimple() {
   const res = await fetch(API_URL, { cache: "no-store" });
   if (!res.ok) throw new Error(`Users fetch failed: ${res.status}`);
   const data = (await res.json()) as unknown;
-  console.log(data);
+
   if (!Array.isArray(data)) throw new Error("Invalid payload: expected array");
 
   setCache<UserDetailsProp[]>(

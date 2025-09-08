@@ -147,6 +147,8 @@
 
       .forgot_password {
         position: relative;
+        text-transform: uppercase;
+        letter-spacing: 0.9px;
         margin: u.rem(24) 0px u.rem(26);
 
         a {

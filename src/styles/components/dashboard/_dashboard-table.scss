@@ -6,14 +6,15 @@ $sm: 640px;
 $lg: 1024px;
 
 %statusbar {
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 1rem;
   border-radius: 100px;
   display: inline-block;
   text-align: center;
   width: fit-content;
   text-transform: capitalize;
+  white-space: nowrap;
+  font-size: u.rem(14);
+  font-weight: 400;
 }
 .active {
   @extend %statusbar;

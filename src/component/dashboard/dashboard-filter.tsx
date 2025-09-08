@@ -51,7 +51,6 @@ export default function UsersFilterForm({
       .getColumn("phone_number")
       ?.setFilterValue(form.phoneNumber || undefined);
     table.getColumn("kyc_status")?.setFilterValue(form.status || undefined);
-    // date: match exact day (see sameDay filterFn below)
     table.getColumn("date_joined")?.setFilterValue(form.date || undefined);
   };
 
