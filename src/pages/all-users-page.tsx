@@ -1,24 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import DashboardMatrics from "../component/dashboard/dashbaord-matrics";
 import DashboardTable from "../component/dashboard/dashboard-table";
 import { useUsers } from "../hook/useUser";
 import LoaderBar from "../component/shared/loader";
+import type { UserDetailsProp } from "../types/user";
+import { getErrorMessage } from "../lib/handle-error";
 
 const AllUserPage: React.FC = () => {
-  // const { logout } = useAuth();
-  // useEffect(() => {
-  //   if (typeof window === "undefined") return; // Prevents running on the server for Hydration Errors
-  //   const storedAuth: string | null = localStorage.getItem("auth_data");
-
-  //   if (storedAuth) {
-  //     const { isLoggedIn } = JSON.parse(storedAuth || "");
-  //     if (!isLoggedIn) logout();
-  //   } else {
-  //     logout();
-  //   }
-  // }, [logout]);.msg
-
   const { data, isLoading, isError, error } = useUsers();
+  const safeData: UserDetailsProp[] = Array.isArray(data) ? data : [];
 
   return (
     <div className="main">
@@ -28,17 +18,17 @@ const AllUserPage: React.FC = () => {
       </div>
       <div className="main__body">
         {/* DASHBOARD MATRICS CARD COMPONENT */}
-        <DashboardMatrics data={data} />
+        <DashboardMatrics data={safeData} />
         {/* DASHBOARD USER LIST TABLE COMPONENT */}
         {isLoading ? (
           <LoaderBar label="Fetching data" />
         ) : error ? (
           <div className="error_holder">
-            <p>{error.message}: Please reload the page</p>
+            <p>{getErrorMessage(error)}: Please reload the page</p>
           </div>
         ) : (
           <DashboardTable
-            data={data}
+            data={safeData}
             isLoading={isLoading}
             isError={isError}
             error={error}

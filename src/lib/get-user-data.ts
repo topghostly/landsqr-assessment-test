@@ -6,14 +6,6 @@ const CACHE_KEY = "lendsqr:users:v1";
 const CACHE_TTL_MS = 10 * 60 * 1000;
 
 export async function getUsersSimple() {
-  //     opts?: {
-  //   signal?: AbortSignal;
-  //   force?: boolean;
-  // }
-  // if (!opts?.force) {
-  //   const cached = getCache<UserDetailsProp[]>(CACHE_KEY);
-  //   if (cached) return cached;
-  // }
   console.log(API_URL);
   const cached = getCache<UserDetailsProp[]>(CACHE_KEY);
   if (cached) return cached;
@@ -31,7 +23,3 @@ export async function getUsersSimple() {
   );
   return data as UserDetailsProp[];
 }
-
-// export function forceRefreshUsers() {
-//   return getUsersSimple({ force: true });
-// }

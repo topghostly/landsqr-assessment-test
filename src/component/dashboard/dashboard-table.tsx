@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -42,7 +42,7 @@ const sameDay: FilterFn<Row> = (row, columnId, filterValue) => {
 };
 const columnHelper = createColumnHelper<Row>();
 
-function DashboardTable({ data, isLoading, isError, error }: SetUserProps) {
+function DashboardTable({ data }: SetUserProps) {
   const navigate = useNavigate();
   const columns = useMemo<ColumnDef<Row, any>[]>(() => {
     return [

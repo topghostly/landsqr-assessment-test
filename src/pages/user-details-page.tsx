@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Button from "../component/shared/button";
 import { useUserById } from "../hook/useUserById";
 import LoaderBar from "../component/shared/loader";
+import { getErrorMessage } from "../lib/handle-error";
 
 function UserDetails() {
   const { id } = useParams<{ id: string }>();
@@ -85,7 +86,7 @@ function UserDetails() {
         <LoaderBar label="Fetching data" />
       ) : error ? (
         <div className="error_holder">
-          <p>{error.message}: Please reload the page</p>
+          <p>{getErrorMessage(error)}: Please reload the page</p>
         </div>
       ) : (
         <div className="details">
@@ -309,34 +310,6 @@ function UserDetails() {
                 </div>
               </div>
             </div>
-            {/* <div className="seperator"></div>
-        <div className="details__body-section">
-          
-          <div className="grid_5">
-            <div className="detail">
-              <p className="detail_title">full Name</p>
-              <p className="detail_point">{userDetails?.guarantor.full_name}</p>
-            </div>
-            <div className="detail">
-              <p className="detail_title">Phone Number</p>
-              <p className="detail_point">
-                {userDetails?.guarantor.phone_number}
-              </p>
-            </div>
-            <div className="detail">
-              <p className="detail_title">Email Address</p>
-              <p className="detail_point">
-                {userDetails?.guarantor.email_address}
-              </p>
-            </div>
-            <div className="detail">
-              <p className="detail_title">Relationship</p>
-              <p className="detail_point">
-                {userDetails?.guarantor.relationship}
-              </p>
-            </div>
-          </div>
-        </div> */}
           </div>
         </div>
       )}

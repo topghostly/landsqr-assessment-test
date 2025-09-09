@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { type MatricsCardProps } from "../../types/layout";
 import type { UserDetailsProp } from "../../types/user";
 
