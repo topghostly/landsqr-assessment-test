@@ -3,16 +3,9 @@ import type { Table } from "@tanstack/react-table";
 import Button from "../shared/button";
 import Dropdown from "../shared/dropdown";
 import type { UserDetailsProp } from "../../types/user";
+import type { FormState } from "../../types/layout";
 
-type FormState = {
-  organization: string;
-  username: string;
-  email: string;
-  date: string;
-  phoneNumber: string;
-  status: string;
-};
-
+// Initial empty filter values
 const initialForm: FormState = {
   organization: "",
   username: "",
@@ -29,6 +22,7 @@ export default function UsersFilterForm({
 }) {
   const [form, setForm] = useState<FormState>(initialForm);
 
+  // Update a field on change
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -36,11 +30,13 @@ export default function UsersFilterForm({
     setForm((f) => ({ ...f, [name]: value }));
   };
 
+  // Clear all form fields
   const handleReset = () => {
     setForm(initialForm);
     table.resetColumnFilters();
   };
 
+  // Apply UI values to TanStack Table column filters
   const handleSubmit = () => {
     table
       .getColumn("organisation_name")

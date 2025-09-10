@@ -18,7 +18,7 @@ import type { UserDetailsProp } from "../../types/user";
 import type { FilterFn } from "@tanstack/react-table";
 
 interface SetUserProps {
-  data: UserDetailsProp[];
+  data: UserDetailsProp[]; // table dataset
   isLoading: boolean;
   isError: boolean;
   error: any;
@@ -26,24 +26,24 @@ interface SetUserProps {
 
 export type Row = UserDetailsProp;
 
+/** Custom date filter */
 const sameDay: FilterFn<Row> = (row, columnId, filterValue) => {
   if (!filterValue) return true;
-
   const raw = row.getValue<string>(columnId);
   if (!raw) return false;
-
   const d = new Date(raw);
   if (Number.isNaN(d.getTime())) return false;
-
-  const rowYMD = d.toISOString().slice(0, 10);
+  const rowYMD = d.toISOString().slice(0, 10); // "YYYY-MM-DD"
   const filterYMD = String(filterValue).slice(0, 10);
-
   return rowYMD === filterYMD;
 };
+
 const columnHelper = createColumnHelper<Row>();
 
 function DashboardTable({ data }: SetUserProps) {
   const navigate = useNavigate();
+
+  /** Memoized columns; if headers use `table`, define after `table` or move filter trigger out. */
   const columns = useMemo<ColumnDef<Row, any>[]>(() => {
     return [
       columnHelper.accessor("organisation_name", {
@@ -94,7 +94,7 @@ function DashboardTable({ data }: SetUserProps) {
             month: "short",
             day: "2-digit",
           }),
-        filterFn: sameDay,
+        filterFn: sameDay, // use custom same-day filter
       }),
       columnHelper.accessor("kyc_status", {
         header: () => (
@@ -156,13 +156,16 @@ function DashboardTable({ data }: SetUserProps) {
     ];
   }, []);
 
+  /** Controlled pagination (initial pagination state) */
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
 
+  /** Prevent null data error */
   const safeData = data ?? [];
 
+  /** Table instance */
   const table = useReactTable({
     data: safeData,
     columns,
@@ -171,13 +174,15 @@ function DashboardTable({ data }: SetUserProps) {
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    filterFns: { sameDay },
     getFilteredRowModel: getFilteredRowModel(),
+    filterFns: { sameDay }, // register custom filter(s)
   });
 
+  /** Get current and total pages for UI */
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 
+  /** Helpers to build compact page number list with ellipses */
   const range = (start: number, end: number) =>
     Array.from({ length: Math.max(0, end - start + 1) }, (_, i) => start + i);
 
@@ -193,14 +198,11 @@ function DashboardTable({ data }: SetUserProps) {
       Math.max(total - boundaryCount + 1, boundaryCount + 1),
       total
     );
-
     const left = Math.max(current - siblingCount, boundaryCount + 1);
     const right = Math.min(current + siblingCount, total - boundaryCount);
-
     const middle = range(left, right);
     const showLeftDots = left > boundaryCount + 1;
     const showRightDots = right < total - boundaryCount;
-
     return [
       ...startPages,
       ...(showLeftDots ? (["dots"] as const) : []),
@@ -215,7 +217,7 @@ function DashboardTable({ data }: SetUserProps) {
   return (
     <>
       <div className="page">
-        {/* <UsersFilterForm table={table} /> */}
+        {/* TABS */}
         <div className="tableWrap">
           <table className="table">
             <thead className="thead">
@@ -250,8 +252,9 @@ function DashboardTable({ data }: SetUserProps) {
         </div>
       </div>
 
-      {/* ---- PAGINATION UI ---- */}
+      {/* PAGINATION CONTROLS */}
       <div className={styles.paginationContainer}>
+        {/* ITEMS PER PAGE */}
         <div className={styles.showing}>
           <span>Showing</span>
           <select
@@ -268,6 +271,7 @@ function DashboardTable({ data }: SetUserProps) {
           <span>out of {data?.length}</span>
         </div>
 
+        {/* NUMBERED PAGER WITH ELLIPSES */}
         <div className={styles.pagination}>
           <button
             className={`${styles.navButton} ${
@@ -316,6 +320,8 @@ function DashboardTable({ data }: SetUserProps) {
 }
 
 export default DashboardTable;
+
+/** Status pill */
 const StatusBadge = ({ status }: { status: string }) => {
   return <span className={`status ${status.toLowerCase()}`}>{status}</span>;
 };

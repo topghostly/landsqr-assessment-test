@@ -9,10 +9,11 @@ export function useUsers() {
   useEffect(() => {
     setLoading(true);
     getUsersSimple()
-      .then(setData)
-      .catch(setError)
+      .then(setData) // Set the data gotten from getUsersSimple
+      .catch(setError) // Catches any error and set it to the error
       .finally(() => setLoading(false));
   }, []);
 
+  // Return users details and fetch states
   return { data, isLoading: loading, isError: !!error, error };
 }

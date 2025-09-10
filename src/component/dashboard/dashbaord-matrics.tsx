@@ -19,9 +19,11 @@ const MatricsCard: React.FC<MatricsCardProps> = ({
   );
 };
 
+/** Dashboard card metrics  */
 const DashboardMatrics = ({ data }: { data: UserDetailsProp[] }) => {
+  // Cache derived list to avoid re calculating on every render
   const activeUsers = useMemo(
-    () => data?.filter((user: UserDetailsProp) => user.active),
+    () => data?.filter((user) => user.active),
     [data]
   );
 

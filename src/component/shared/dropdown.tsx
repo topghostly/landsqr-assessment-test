@@ -1,26 +1,20 @@
-// src/shared/components/Dropdown.tsx
-"use client";
-
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "../../styles/modules/dropdown.module.scss";
-
-export interface DropdownProps {
-  trigger: React.ReactNode;
-  children: React.ReactNode;
-}
+import type { DropdownProps } from "../../types/layout";
 
 const Dropdown = ({ trigger, children }: DropdownProps) => {
-  const [open, setOpen] = useState(false); // logically open (mounted)
-  const [entered, setEntered] = useState(false); // has applied the "enter" class
-  const [closing, setClosing] = useState(false); // exit phase
-  const [coords, setCoords] = useState({ left: 0, top: 0, width: 0 });
+  const [open, setOpen] = useState(false);
+  const [entered, setEntered] = useState(false); // Used for entry transition
+  const [closing, setClosing] = useState(false); // Used for exit transition
+  const [coords, setCoords] = useState({ left: 0, top: 0, width: 0 }); // Positioning
 
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const mounted = open || closing; // keep mounted during fade-out
+  const mounted = open || closing; // Mount dropdown while opening/closing
 
+  // Calculate dropdown position
   const updatePosition = () => {
     const el = triggerRef.current;
     if (!el) return;
@@ -43,6 +37,7 @@ const Dropdown = ({ trigger, children }: DropdownProps) => {
 
   const onTriggerClick = () => (open ? closeDropdown() : openDropdown());
 
+  // Close on outside click, escape key, or reposition on resize/scroll
   useEffect(() => {
     if (!mounted) return;
 
@@ -73,6 +68,7 @@ const Dropdown = ({ trigger, children }: DropdownProps) => {
     };
   }, [mounted, open]);
 
+  // Delay entry transition until next frame
   useEffect(() => {
     if (!open || closing) return;
     const id = requestAnimationFrame(() => setEntered(true));

@@ -4,13 +4,11 @@ import styles from "../styles/modules/auth.module.scss";
 import Button from "../component/shared/button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hook/useAuth";
+import type { SignInData } from "../types/layout";
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
-  interface SignInData {
-    email: string;
-    password: string;
-  }
+
   const [signinData, setSigninData] = useState<SignInData>({
     email: "",
     password: "",

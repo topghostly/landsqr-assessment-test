@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Dropdown from "../shared/dropdown";
 import { useAuth } from "../../hook/useAuth";
 
+// Side bar links list
 const menuItems = [
   {
     title: "CUSTOMERS",

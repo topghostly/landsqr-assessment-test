@@ -1,4 +1,4 @@
-import React, {type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 
 export interface ChildrenLayoutProp {
   children: ReactNode;
@@ -32,6 +32,34 @@ export interface MatricsCardProps {
 
 export interface FilterPageProps {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface SignInData {
+  email: string;
+  password: string;
+}
+
+export type FormState = {
+  organization: string;
+  username: string;
+  email: string;
+  date: string;
+  phoneNumber: string;
+  status: string;
+};
+
+export type LoadingProps = {
+  fixedTop?: boolean;
+  label?: string;
+};
+
+export interface DropdownProps {
+  trigger: React.ReactNode;
+  children: React.ReactNode;
+}
+
+export interface ChildrenLayoutProp {
+  children: ReactNode;
 }
 
 export interface SignInData {

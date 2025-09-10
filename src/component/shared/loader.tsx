@@ -1,15 +1,10 @@
-import React from "react";
 import styles from "../../styles/components/loader.module.scss";
-
-type Props = {
-  fixedTop?: boolean;
-  label?: string;
-};
+import type { LoadingProps } from "../../types/layout";
 
 export default function LoaderBar({
   fixedTop = false,
   label = "Loading",
-}: Props) {
+}: LoadingProps) {
   return (
     <div className={styles.loaderHolder}>
       <span>{label}</span>

@@ -8,7 +8,7 @@ import { getErrorMessage } from "../lib/handle-error";
 function UserDetails() {
   const { id } = useParams<{ id: string }>();
 
-  const { data, isLoading, isError, error } = useUserById(id);
+  const { data, isLoading, error } = useUserById(id);
 
   const [userDetails, setUserDetails] = useState(data);
 
