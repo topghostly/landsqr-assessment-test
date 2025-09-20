@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
             variant="fill"
             color="primary"
             type="button"
-            onClick={() => console.log("Clicked")}
+            // onClick={() => console.log("Clicked")}
             customClass={{ borderRadius: "0 0.5rem 0.5rem 0", width: "100%" }}
           >
             <img

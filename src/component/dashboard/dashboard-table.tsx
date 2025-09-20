@@ -18,7 +18,7 @@ import type { UserDetailsProp } from "../../types/user";
 import type { FilterFn } from "@tanstack/react-table";
 
 interface SetUserProps {
-  data: UserDetailsProp[]; // table dataset
+  data: UserDetailsProp[];
   isLoading: boolean;
   isError: boolean;
   error: any;
@@ -32,8 +32,7 @@ const sameDay: FilterFn<Row> = (row, columnId, filterValue) => {
   const raw = row.getValue<string>(columnId);
   if (!raw) return false;
   const d = new Date(raw);
-  if (Number.isNaN(d.getTime())) return false;
-  const rowYMD = d.toISOString().slice(0, 10); // "YYYY-MM-DD"
+  const rowYMD = d.toISOString().slice(0, 10); // YYYY-MM-DD format
   const filterYMD = String(filterValue).slice(0, 10);
   return rowYMD === filterYMD;
 };
@@ -43,7 +42,6 @@ const columnHelper = createColumnHelper<Row>();
 function DashboardTable({ data }: SetUserProps) {
   const navigate = useNavigate();
 
-  /** Memoized columns; if headers use `table`, define after `table` or move filter trigger out. */
   const columns = useMemo<ColumnDef<Row, any>[]>(() => {
     return [
       columnHelper.accessor("organisation_name", {
@@ -169,16 +167,16 @@ function DashboardTable({ data }: SetUserProps) {
   const table = useReactTable({
     data: safeData,
     columns,
-    initialState: { pagination: { pageSize: 1 } },
+    // initialState: { pagination: { pageSize: 1 } },
     state: { pagination },
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    filterFns: { sameDay }, // register custom filter(s)
+    filterFns: { sameDay },
   });
 
-  /** Get current and total pages for UI */
+  /** Get current and total pages  */
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 
@@ -188,21 +186,16 @@ function DashboardTable({ data }: SetUserProps) {
 
   function buildPageItems(
     current: number,
-    total: number,
-    siblingCount = 1,
-    boundaryCount = 1
+    total: number
   ): Array<number | "dots"> {
     if (total <= 0) return [];
-    const startPages = range(1, Math.min(boundaryCount, total));
-    const endPages = range(
-      Math.max(total - boundaryCount + 1, boundaryCount + 1),
-      total
-    );
-    const left = Math.max(current - siblingCount, boundaryCount + 1);
-    const right = Math.min(current + siblingCount, total - boundaryCount);
+    const startPages = range(1, Math.min(1, total));
+    const endPages = range(Math.max(total, 2), total);
+    const left = Math.max(current - 1, 2);
+    const right = Math.min(current + 1, total - 1);
     const middle = range(left, right);
-    const showLeftDots = left > boundaryCount + 1;
-    const showRightDots = right < total - boundaryCount;
+    const showLeftDots = left > 2;
+    const showRightDots = right < total - 1;
     return [
       ...startPages,
       ...(showLeftDots ? (["dots"] as const) : []),
@@ -212,7 +205,7 @@ function DashboardTable({ data }: SetUserProps) {
     ];
   }
 
-  const items = buildPageItems(currentPage, totalPages, 1, 1);
+  const items = buildPageItems(currentPage, totalPages);
 
   return (
     <>

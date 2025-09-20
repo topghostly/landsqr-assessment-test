@@ -13,19 +13,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = sessionStorage.getItem("irater-user");
+    const storedUser = sessionStorage.getItem("lendsqr::user");
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
   // Log in user, save to session and update state
   const login = (userData: User) => {
-    sessionStorage.setItem("irater-user", JSON.stringify(userData));
+    sessionStorage.setItem("lendsqr::user", JSON.stringify(userData));
     setUser(userData);
     navigate("/");
   };
 
   const logout = () => {
-    localStorage.removeItem("irater-user");
+    sessionStorage.removeItem("lendsqr::user");
     setUser(null);
     navigate("/auth/login");
   };

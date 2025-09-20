@@ -36,7 +36,7 @@ export default function UsersFilterForm({
     table.resetColumnFilters();
   };
 
-  // Apply UI values to TanStack Table column filters
+  // Apply values to TanStack Table column filters
   const handleSubmit = () => {
     table
       .getColumn("organisation_name")

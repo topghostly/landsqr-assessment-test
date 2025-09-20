@@ -14,7 +14,6 @@ function UserDetails() {
 
   useEffect(() => {
     setUserDetails(data);
-    console.log(data);
   }, [data]);
 
   // Define button styles to avoid crowded jsx

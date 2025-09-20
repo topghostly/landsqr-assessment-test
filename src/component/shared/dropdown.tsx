@@ -7,19 +7,19 @@ const Dropdown = ({ trigger, children }: DropdownProps) => {
   const [open, setOpen] = useState(false);
   const [entered, setEntered] = useState(false); // Used for entry transition
   const [closing, setClosing] = useState(false); // Used for exit transition
-  const [coords, setCoords] = useState({ left: 0, top: 0, width: 0 }); // Positioning
+  const [coords, setCoords] = useState({ left: 0, top: 0 }); // Positioning
 
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const mounted = open || closing; // Mount dropdown while opening/closing
+  const mounted = open || closing;
 
   // Calculate dropdown position
   const updatePosition = () => {
-    const el = triggerRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    setCoords({ left: r.left - 120, top: r.bottom + 8, width: r.width });
+    const element = triggerRef.current;
+    if (!element) return;
+    const r = element.getBoundingClientRect();
+    setCoords({ left: r.left - 120, top: r.bottom + 8 });
   };
 
   const openDropdown = () => {
@@ -68,7 +68,6 @@ const Dropdown = ({ trigger, children }: DropdownProps) => {
     };
   }, [mounted, open]);
 
-  // Delay entry transition until next frame
   useEffect(() => {
     if (!open || closing) return;
     const id = requestAnimationFrame(() => setEntered(true));
@@ -76,17 +75,17 @@ const Dropdown = ({ trigger, children }: DropdownProps) => {
   }, [open, closing]);
 
   useEffect(() => {
-    const el = dropdownRef.current;
-    if (!el) return;
+    const ele = dropdownRef.current;
+    if (!ele) return;
     const onEnd = (e: TransitionEvent) => {
-      if (e.target !== el) return;
+      if (e.target !== ele) return;
       if (closing) {
         setOpen(false);
         setClosing(false);
       }
     };
-    el.addEventListener("transitionend", onEnd);
-    return () => el.removeEventListener("transitionend", onEnd);
+    ele.addEventListener("transitionend", onEnd);
+    return () => ele.removeEventListener("transitionend", onEnd);
   }, [closing]);
 
   return (
@@ -108,7 +107,7 @@ const Dropdown = ({ trigger, children }: DropdownProps) => {
               {
                 "--dd-left": `${coords.left}px`,
                 "--dd-top": `${coords.top}px`,
-                "--dd-minwidth": `${coords.width}px`,
+                // "--dd-minwidth": `${coords.width}px`,
               } as React.CSSProperties
             }
           >
