@@ -1,13 +1,11 @@
-import type { UserDetailsProp } from "../types/user";
+type CacheEnvelope<T> = { at: number; ttl: number; data: T };
 
-type CacheEnvelope = { at: number; ttl: number; data: UserDetailsProp[] };
-
-export function getCache(key: string): UserDetailsProp[] | null {
+export function getCache<T>(key: string): T | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
-    const { at, ttl, data } = JSON.parse(raw) as CacheEnvelope;
+    const { at, ttl, data } = JSON.parse(raw) as CacheEnvelope<T>;
     if (typeof at !== "number" || typeof ttl !== "number") return null;
     if (Date.now() - at > ttl) return null;
     return data;
@@ -16,10 +14,10 @@ export function getCache(key: string): UserDetailsProp[] | null {
   }
 }
 
-export function setCache(key: string, data: UserDetailsProp[], ttlMs: number) {
+export function setCache<T>(key: string, data: T, ttlMs: number) {
   if (typeof window === "undefined") return;
   try {
-    const env: CacheEnvelope = {
+    const env: CacheEnvelope<T> = {
       at: Date.now(),
       ttl: ttlMs,
       data,
