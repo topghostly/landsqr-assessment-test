@@ -2,7 +2,7 @@ import type { UserDetailsProp } from "../types/user";
 
 type CacheEnvelope = { at: number; ttl: number; data: UserDetailsProp[] };
 
-export function getCache<T>(key: string): UserDetailsProp[] | null {
+export function getCache(key: string): UserDetailsProp[] | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = localStorage.getItem(key);
@@ -16,11 +16,7 @@ export function getCache<T>(key: string): UserDetailsProp[] | null {
   }
 }
 
-export function setCache<T>(
-  key: string,
-  data: UserDetailsProp[],
-  ttlMs: number
-) {
+export function setCache(key: string, data: UserDetailsProp[], ttlMs: number) {
   if (typeof window === "undefined") return;
   try {
     const env: CacheEnvelope = {
